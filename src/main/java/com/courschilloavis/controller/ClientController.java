@@ -5,6 +5,8 @@ import com.courschilloavis.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -22,5 +24,10 @@ public class ClientController {
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void create(@RequestBody Client client){
         this.clientService.create(client);
+    }
+
+    @GetMapping(produces= APPLICATION_JSON_VALUE)
+    public List<Client> search(){
+        return this.clientService.search();
     }
 }
