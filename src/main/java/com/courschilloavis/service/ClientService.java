@@ -5,6 +5,7 @@ import com.courschilloavis.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -18,10 +19,19 @@ public class ClientService {
 
 
     public void create(Client client){
-        this.clientRepository.save(client);
+        Client clientInBdd= this.clientRepository.findByEmail(client.getEmail());
+        if(clientInBdd == null) {
+            this.clientRepository.save(client);
+        }
     }
 
     public List<Client> search(){
         return this.clientRepository.findAll();
+    }
+
+    public Client read(long id) {
+        Optional<Client>  optionalClient= this.clientRepository.findById(id);
+
+        return optionalClient.orElse(null);
     }
 }

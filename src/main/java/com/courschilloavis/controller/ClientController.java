@@ -30,4 +30,9 @@ public class ClientController {
     public List<Client> search(){
         return this.clientService.search();
     }
+
+    @GetMapping(path="{id}", produces= APPLICATION_JSON_VALUE)
+    public Client read(@PathVariable long id){
+        return this.clientService.read(id);
+    }
 }
