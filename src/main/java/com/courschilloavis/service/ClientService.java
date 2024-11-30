@@ -34,4 +34,12 @@ public class ClientService {
 
         return optionalClient.orElse(null);
     }
+
+    public Client readOrCreate(Client clientToCreate){
+        Client clientInBdd= this.clientRepository.findByEmail(clientToCreate.getEmail());
+        if(clientInBdd == null) {
+            clientInBdd= this.clientRepository.save(clientToCreate);
+        }
+        return clientInBdd;
+    }
 }

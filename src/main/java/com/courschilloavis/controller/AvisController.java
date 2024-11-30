@@ -5,6 +5,8 @@ import com.courschilloavis.service.AvisService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -21,6 +23,13 @@ public class AvisController {
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void create(@RequestBody Avis avis){
         this.avisService.create(avis);
+    }
+
+    @GetMapping
+    public @ResponseBody List<Avis> search(){
+
+        return this.avisService.search();
+
     }
 
 }

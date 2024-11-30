@@ -3,6 +3,9 @@ package com.courschilloavis.models;
 import com.courschilloavis.enums.TypeAvis;
 import jakarta.persistence.*;
 
+import static jakarta.persistence.CascadeType.MERGE;
+import static jakarta.persistence.CascadeType.PERSIST;
+
 @Entity
 @Table(name="AVIS")
 public class Avis {
@@ -12,7 +15,7 @@ public class Avis {
     private long id;
     private String text;
     private TypeAvis Type;
-    @ManyToOne
+    @ManyToOne(cascade ={PERSIST, MERGE})
     @JoinColumn(name = "CLIENT_ID")
     private Client client;
 
