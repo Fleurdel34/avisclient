@@ -2,10 +2,14 @@ package com.courschilloavis.models;
 
 import com.courschilloavis.enums.TypeAvis;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import static jakarta.persistence.CascadeType.MERGE;
 import static jakarta.persistence.CascadeType.PERSIST;
 
+@Setter
+@Getter
 @Entity
 @Table(name="AVIS")
 public class Avis {
@@ -14,50 +18,19 @@ public class Avis {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String text;
-    private TypeAvis Type;
+    private TypeAvis type;
     @ManyToOne(cascade ={PERSIST, MERGE})
     @JoinColumn(name = "CLIENT_ID")
     private Client client;
 
+
+    public Avis(String text, TypeAvis type, Client client) {
+        this.text = text;
+        this.type = type;
+        this.client = client;
+    }
+
     public Avis() {
-    }
 
-    public Avis(long id, String text, TypeAvis type, Client client) {
-        this.id = id;
-        this.text = text;
-        Type = type;
-        this.client = client;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public TypeAvis getType() {
-        return Type;
-    }
-
-    public void setType(TypeAvis type) {
-        Type = type;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 }

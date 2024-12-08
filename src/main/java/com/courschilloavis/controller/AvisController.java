@@ -1,5 +1,6 @@
 package com.courschilloavis.controller;
 
+import com.courschilloavis.enums.TypeAvis;
 import com.courschilloavis.models.Avis;
 import com.courschilloavis.service.AvisService;
 import org.springframework.http.HttpStatus;
@@ -26,10 +27,14 @@ public class AvisController {
     }
 
     @GetMapping
-    public @ResponseBody List<Avis> search(){
+    public @ResponseBody List<Avis> search(@RequestParam(required = false) TypeAvis type){
+        return this.avisService.search(type);
+    }
 
-        return this.avisService.search();
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(path="{id}")
+    public void delete(@PathVariable Long id){
+        this.avisService.delete(id);
     }
 
 }
