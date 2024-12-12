@@ -42,4 +42,16 @@ public class ClientService {
         }
         return clientInBdd;
     }
+
+    public void modify(long id, Client client) {
+        Client clientBDD = this.read(id);
+
+        if(clientBDD.getId().equals(client.getId())){
+            clientBDD.setEmail(client.getEmail());
+            clientBDD.setTelephone(client.getTelephone());
+            this.clientRepository.save(clientBDD);
+        }
+
+
+    }
 }

@@ -19,13 +19,15 @@ public class Client {
 
     @Column(unique = true)
     private String email;
+    private String telephone;
 
     public Client() {
     }
 
-    public Client(Long id, String email) {
+    public Client(Long id, String email, String telephone) {
         this.id = id;
         this.email = email;
+        this.telephone= telephone;
     }
 
 }

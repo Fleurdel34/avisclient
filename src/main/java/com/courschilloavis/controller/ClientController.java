@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -34,5 +35,11 @@ public class ClientController {
     @GetMapping(path="{id}", produces= APPLICATION_JSON_VALUE)
     public Client read(@PathVariable long id){
         return this.clientService.read(id);
+    }
+
+    @ResponseStatus(NO_CONTENT)
+    @PutMapping(path="{id}", consumes= APPLICATION_JSON_VALUE)
+    public void modify(@PathVariable long id, @RequestBody Client client){
+        this.clientService.modify(id, client);
     }
 }
