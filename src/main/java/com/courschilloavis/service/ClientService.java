@@ -2,6 +2,7 @@ package com.courschilloavis.service;
 
 import com.courschilloavis.models.Client;
 import com.courschilloavis.repository.ClientRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,9 @@ public class ClientService {
     public Client read(long id) {
         Optional<Client>  optionalClient= this.clientRepository.findById(id);
 
-        return optionalClient.orElse(null);
+        return optionalClient.orElseThrow(
+                () -> new EntityNotFoundException("Aucun client n'existe avec cet identifiant")
+        );
     }
 
     public Client readOrCreate(Client clientToCreate){
