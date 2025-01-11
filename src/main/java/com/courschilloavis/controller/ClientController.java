@@ -1,12 +1,13 @@
 package com.courschilloavis.controller;
 
-import com.courschilloavis.dto.ErrorEntity;
+import com.courschilloavis.dto.ClientDTO;
 import com.courschilloavis.models.Client;
 import com.courschilloavis.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.stream.Stream;
+
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -28,7 +29,7 @@ public class ClientController {
     }
 
     @GetMapping(produces= APPLICATION_JSON_VALUE)
-    public List<Client> search(){
+    public Stream<ClientDTO> search(){
         return this.clientService.search();
     }
 

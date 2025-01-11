@@ -1,21 +1,25 @@
 package com.courschilloavis.service;
 
+import com.courschilloavis.dto.ClientDTO;
+import com.courschilloavis.mapper.ClientDTOMapper;
 import com.courschilloavis.models.Client;
 import com.courschilloavis.repository.ClientRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 
 @Service
 public class ClientService {
 
     private final ClientRepository clientRepository;
+    private final ClientDTOMapper clientDTOMapper;
 
-    public ClientService(ClientRepository clientRepository) {
+    public ClientService(ClientRepository clientRepository, ClientDTOMapper clientDTOMapper) {
         this.clientRepository = clientRepository;
+        this.clientDTOMapper = clientDTOMapper;
     }
 
 
@@ -26,8 +30,9 @@ public class ClientService {
         }
     }
 
-    public List<Client> search(){
-        return this.clientRepository.findAll();
+    public Stream<ClientDTO> search(){
+        return this.clientRepository.findAll()
+                .stream().map(clientDTOMapper);
     }
 
     public Client read(long id) {
